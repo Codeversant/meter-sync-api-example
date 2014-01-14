@@ -1,65 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<TableLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <TableLayout
+    <TableRow
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <TableRow
+        <TextView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content"
+            android:text="Meter State:"
+            android:textAppearance="@android:style/TextAppearance.Large" />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Meter State:"
-                android:textAppearance="@android:style/TextAppearance.Large" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:id="@+id/stateValue"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+    </TableRow>
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" "
-                android:id="@+id/stateValue"
-                android:textAppearance="@android:style/TextAppearance.Large" />
-        </TableRow>
-        <TableRow
+        <TextView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content"
+            android:text="Last Fare:"
+            android:textAppearance="@android:style/TextAppearance.Large" />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Last Fare:"
-                android:textAppearance="@android:style/TextAppearance.Large" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:id="@+id/lastFareValue"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+    </TableRow>
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" "
-                android:id="@+id/lastFareValue"
-                android:textAppearance="@android:style/TextAppearance.Large" />
-        </TableRow>
-        <TableRow
+        <TextView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content"
+            android:text="Last Extras:"
+            android:textAppearance="@android:style/TextAppearance.Large" />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Last Distance:"
-                android:textAppearance="@android:style/TextAppearance.Large" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:id="@+id/lastExtraValue"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+    </TableRow>
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" "
-                android:id="@+id/lastDistanceValue"
-                android:textAppearance="@android:style/TextAppearance.Large" />
-        </TableRow>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Last Tax:"
+            android:textAppearance="@android:style/TextAppearance.Large" />
 
-    </TableLayout>
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:id="@+id/lastTaxValue"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+    </TableRow>
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Last Total:"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:id="@+id/lastTotalValue"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Last Distance:"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:id="@+id/lastDistanceValue"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+    </TableRow>
+
+</TableLayout>
 

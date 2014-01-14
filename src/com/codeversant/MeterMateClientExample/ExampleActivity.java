@@ -12,8 +12,13 @@ public class ExampleActivity extends Activity {
     public static final String MeterOnIntentAction = "com.codeversant.MeterMate.MeterOn";
     public static final String MeterOffIntentAction = "com.codeversant.MeterMate.MeterOff";
 
+    public static final String QueryMeterStatusAction = "com.codeversant.MeterMate.QueryStatus";
+
     private TextView stateLabel;
     private TextView fareLabel;
+    private TextView extraLabel;
+    private TextView taxLabel;
+    private TextView totalLabel;
     private TextView distanceLabel;
 
 
@@ -27,12 +32,22 @@ public class ExampleActivity extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) {
             stateLabel.setText("Meter Off");
+
             String lastFare = intent.getStringExtra("FARE");
             String lastDistance = intent.getStringExtra("DISTANCE");
+            String lastExtra = intent.getStringExtra("EXTRAS");
+            String lastTax = intent.getStringExtra("TAX");
+            String lastTotal = intent.getStringExtra("TOTAL");
+
             fareLabel.setText(lastFare);
+            extraLabel.setText(lastExtra);
+            taxLabel.setText(lastTax);
+            totalLabel.setText(lastTotal);
             distanceLabel.setText(lastDistance);
         }
     };
+
+
     /**
      * Called when the activity is first created.
      */
@@ -43,6 +58,10 @@ public class ExampleActivity extends Activity {
 
         stateLabel = (TextView)findViewById(R.id.stateValue);
         fareLabel = (TextView)findViewById(R.id.lastFareValue);
+        extraLabel = (TextView)findViewById(R.id.lastExtraValue);
+        taxLabel = (TextView)findViewById(R.id.lastTaxValue);
+        totalLabel = (TextView)findViewById(R.id.lastTotalValue);
+
         distanceLabel = (TextView)findViewById(R.id.lastDistanceValue);
     }
 
@@ -60,5 +79,16 @@ public class ExampleActivity extends Activity {
         unregisterReceiver(meterOffReceiver);
 
         super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sendBroadcast(new Intent(QueryMeterStatusAction));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }
