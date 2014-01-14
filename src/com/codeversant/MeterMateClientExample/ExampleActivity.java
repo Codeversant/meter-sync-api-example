@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class ExampleActivity extends Activity {
-    public static final String MeterOnIntentAction = "com.codeversant.MeterMate.MeterOn";
-    public static final String MeterOffIntentAction = "com.codeversant.MeterMate.MeterOff";
 
-    public static final String QueryMeterStatusAction = "com.codeversant.MeterMate.QueryStatus";
+
 
     private TextView stateLabel;
     private TextView fareLabel;
@@ -33,11 +31,11 @@ public class ExampleActivity extends Activity {
         public void onReceive(Context context, Intent intent) {
             stateLabel.setText("Meter Off");
 
-            String lastFare = intent.getStringExtra("FARE");
-            String lastDistance = intent.getStringExtra("DISTANCE");
-            String lastExtra = intent.getStringExtra("EXTRAS");
-            String lastTax = intent.getStringExtra("TAX");
-            String lastTotal = intent.getStringExtra("TOTAL");
+            String lastFare = intent.getStringExtra(MeterMateApi.FARE);
+            String lastDistance = intent.getStringExtra(MeterMateApi.DISTANCE);
+            String lastExtra = intent.getStringExtra(MeterMateApi.EXTRAS);
+            String lastTax = intent.getStringExtra(MeterMateApi.TAX);
+            String lastTotal = intent.getStringExtra(MeterMateApi.TOTAL);
 
             fareLabel.setText(lastFare);
             extraLabel.setText(lastExtra);
@@ -68,8 +66,8 @@ public class ExampleActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        registerReceiver(meterOnReceiver, new IntentFilter(MeterOnIntentAction));
-        registerReceiver(meterOffReceiver,new IntentFilter(MeterOffIntentAction));
+        registerReceiver(meterOnReceiver, new IntentFilter(MeterMateApi.MeterOnIntentAction));
+        registerReceiver(meterOffReceiver, new IntentFilter(MeterMateApi.MeterOffIntentAction));
 
     }
 
@@ -83,8 +81,9 @@ public class ExampleActivity extends Activity {
 
     @Override
     protected void onResume() {
+
         super.onResume();
-        sendBroadcast(new Intent(QueryMeterStatusAction));
+        sendBroadcast(new Intent(MeterMateApi.QueryMeterStatusAction));
     }
 
     @Override
