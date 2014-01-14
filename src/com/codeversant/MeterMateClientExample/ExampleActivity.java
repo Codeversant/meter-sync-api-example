@@ -26,11 +26,15 @@ public class ExampleActivity extends Activity {
             stateLabel.setText("Meter On");
         }
     };
+
     private final BroadcastReceiver meterOffReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             stateLabel.setText("Meter Off");
 
+            //Optional extra data on last fare
+            //this is only present on the initial MeterOff intent
+            //NOT in the response to QueryMeterStatus
             String lastFare = intent.getStringExtra(MeterMateApi.FARE);
             String lastDistance = intent.getStringExtra(MeterMateApi.DISTANCE);
             String lastExtra = intent.getStringExtra(MeterMateApi.EXTRAS);
