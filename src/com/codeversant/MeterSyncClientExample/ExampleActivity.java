@@ -1,4 +1,4 @@
-package com.codeversant.MeterMateClientExample;
+package com.codeversant.MeterSyncClientExample;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -9,9 +9,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class ExampleActivity extends Activity {
-
-
-
     private TextView stateLabel;
     private TextView fareLabel;
     private TextView extraLabel;
@@ -23,9 +20,23 @@ public class ExampleActivity extends Activity {
     private final BroadcastReceiver meterOnReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            stateLabel.setText("Meter On");
+            stateLabel.setText("Meter On/Time On");
         }
     };
+    private final BroadcastReceiver timeOffReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            stateLabel.setText("Meter On/Time Off");
+        }
+    };
+    private final BroadcastReceiver timeOnReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            stateLabel.setText("Meter On/Time On");
+        }
+    };
+
+
 
     private final BroadcastReceiver meterOffReceiver = new BroadcastReceiver() {
         @Override
@@ -35,11 +46,11 @@ public class ExampleActivity extends Activity {
             //Optional extra data on last fare
             //this is only present on the initial MeterOff intent
             //NOT in the response to QueryMeterStatus
-            String lastFare = intent.getStringExtra(MeterMateApi.FARE);
-            String lastDistance = intent.getStringExtra(MeterMateApi.DISTANCE);
-            String lastExtra = intent.getStringExtra(MeterMateApi.EXTRAS);
-            String lastTax = intent.getStringExtra(MeterMateApi.TAX);
-            String lastTotal = intent.getStringExtra(MeterMateApi.TOTAL);
+            String lastFare = intent.getStringExtra(MeterSyncApi.FARE);
+            String lastDistance = intent.getStringExtra(MeterSyncApi.DISTANCE);
+            String lastExtra = intent.getStringExtra(MeterSyncApi.EXTRAS);
+            String lastTax = intent.getStringExtra(MeterSyncApi.TAX);
+            String lastTotal = intent.getStringExtra(MeterSyncApi.TOTAL);
 
             fareLabel.setText(lastFare);
             extraLabel.setText(lastExtra);
@@ -70,24 +81,33 @@ public class ExampleActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        registerReceiver(meterOnReceiver, new IntentFilter(MeterMateApi.MeterOnIntentAction));
-        registerReceiver(meterOffReceiver, new IntentFilter(MeterMateApi.MeterOffIntentAction));
+        //Register the receivers for MeterSync messages.
+        //We do this in onStart instead of onResume so that we
+        //continue to receive messages while we're in the background.
+        registerReceiver(meterOnReceiver, new IntentFilter(MeterSyncApi.MeterOnIntentAction));
+        registerReceiver(meterOffReceiver, new IntentFilter(MeterSyncApi.MeterOffIntentAction));
+        registerReceiver(timeOffReceiver, new IntentFilter(MeterSyncApi.TimeOffIntentAction));
+        registerReceiver(timeOnReceiver, new IntentFilter(MeterSyncApi.TimeOnIntentAction));
 
     }
 
     @Override
     protected void onStop() {
+        //Unregister the MeterSync message receivers
         unregisterReceiver(meterOnReceiver);
         unregisterReceiver(meterOffReceiver);
+        unregisterReceiver(timeOffReceiver);
+        unregisterReceiver(timeOnReceiver);
 
         super.onStop();
     }
 
     @Override
     protected void onResume() {
-
         super.onResume();
-        sendBroadcast(new Intent(MeterMateApi.QueryMeterStatusAction));
+        //Request that MeterSync send a status update
+        //indicating whether the meter is on or off
+        sendBroadcast(new Intent(MeterSyncApi.QueryMeterStatusAction));
     }
 
     @Override
