@@ -17,7 +17,7 @@ MeterSync broadcasts four events via Intents:
      */
     public static final String MeterOnIntentAction = "com.codeversant.MeterSync.MeterOn";
     
-Meter On is broadcast when the meter is switched to hired and the fare begins to accrue.  Your app can listen for this Intent to know that the driver has loaded a fare. This event is also sent in response when an app sends a Query Status Intent and the meter is on.. 
+<b>com.codeversant.MeterSync.MeterOn</b> is broadcast when the meter is switched to hired and the fare begins to accrue.  Your app can listen for this Intent to know that the driver has loaded a fare. This event is also sent in response when an app sends a Query Status Intent and the meter is on.. 
 
 <h4>Meter Off</h4>
 
@@ -26,7 +26,7 @@ Meter On is broadcast when the meter is switched to hired and the fare begins to
      */
     public static final String MeterOffIntentAction = "com.codeversant.MeterSync.MeterOff";
 
-When Meter Off is broadcast as a result of the meter being switched to vacant, the Intent will contain the fare components as String extras.
+When <b>com.codeversant.MeterSync.MeterOff</b> is broadcast as a result of the meter being switched to vacant, the Intent will contain the fare components as String extras.
 
     public static final String FARE = "FARE";
     public static final String EXTRAS = "EXTRAS";
@@ -45,7 +45,7 @@ MeterSync broadcasts Meter Off in response to a status query as well, but in tho
      */
     public static final String TimeOffIntentAction = "com.codeversant.MeterSync.MeterTimeOff";
 
-The meter is on, but the time has been turned off.   
+MeterSync broadcasts <b>com.codeversant.MeterSync.MeterTimeOff</b> when the meter is on, but the time has been turned off.   
 
 <h4>Meter Time On</h4>
 
@@ -54,7 +54,7 @@ The meter is on, but the time has been turned off.
       */
     public static final String TimeOnIntentAction = "com.codeversant.MeterSync.MeterTimeOn";
 
-The meter is on, and the time was off, but has been turned back on
+MeterSync broadcasts <b>com.codeversant.MeterSync.MeterTime</b> when the meter is on, and the time was off, but has been turned back on
     
 <h3>Meter Commands</h3>
 Broadcast by your app to MeterSync
