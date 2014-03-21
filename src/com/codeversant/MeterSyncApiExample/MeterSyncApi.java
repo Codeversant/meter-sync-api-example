@@ -1,4 +1,4 @@
-package com.codeversant.MeterSyncClientExample;
+package com.codeversant.MeterSyncApiExample;
 
 /**
  * Created with IntelliJ IDEA.

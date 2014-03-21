@@ -1,4 +1,4 @@
-package com.codeversant.MeterSyncClientExample;
+package com.codeversant.MeterSyncApiExample;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
