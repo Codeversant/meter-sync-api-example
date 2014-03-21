@@ -1,16 +1,19 @@
-meter-sync-api-example
+<H2>meter-sync-api-example</H2>
 ======================
 
-Installing MeterSync
+<h3>Installing MeterSync</h3>
 Please refer to the MeterSync User Guide for installation instructions
-Communicating with MeterSync
+
+<h3>Communicating with MeterSync</h3>
 MeterSync externally broadcasts various Intents to communicate with external programs. It also listens for certain Intents to allow your program to send commands to MeterSync. All communication is handled asynchronously. 
 
 The advantage of this strategy is that if MeterSync is not installed on a user’s device, your app will still work as it should, except that it will receive no information from the taxi meter. 
-Meter Events
+
+<h3>Meter Events</h3>
 MeterSync broadcasts four events via Intents:
 
-Meter On 
+<h4>Meter On</h4> 
+
     /**
      * Meter has been turned on, or is already on (if in response to a status query)
      */
@@ -18,7 +21,8 @@ Meter On
     
 Meter On is broadcast when the meter is switched to hired and the fare begins to accrue.  Your app can listen for this Intent to know that the driver has loaded a fare. This event is also sent in response when an app sends a Query Status Intent and the meter is on.. 
 
-Meter Off
+<h4>Meter Off</h4>
+
     /**
      * Meter has been turned off, or is already off (if in response to a status query)
      */
@@ -36,14 +40,17 @@ Centrodyne meters are currency agnostic, and simply deal with hundredths of a cu
 
 MeterSync broadcasts Meter Off in response to a status query as well, but in those cases, the fare is not included. When the Meter Off Intent contains extras for the fare, tax, etc, your app can be sure that it was sent in response to the meter going vacant, and that it hasn’t already been broadcast for that trip.
 
-Meter Time Off
+<h4>Meter Time Off</h4>
+
     /**
      * Meter's timer has been turned off while hired
      */
     public static final String TimeOffIntentAction = "com.codeversant.MeterSync.MeterTimeOff";
 
 The meter is on, but the time has been turned off.   
-Meter Time On
+
+<h4>Meter Time On</h4>
+
     /**
      * Meter's timer has been turned back on while hired
       */
@@ -51,10 +58,11 @@ Meter Time On
 
 The meter is on, and the time was off, but has been turned back on
     
-Meter Commands
+<h3>Meter Commands</h3>
 Broadcast by your app to MeterSync
 
-Query Status
+<h4>Query Status</h4>
+
     /**
      * Request that MeterSync send a status update.
      * It will respond by sending one of the above intents (ie., MeterOn or MeterOff)
