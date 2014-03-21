@@ -7,8 +7,6 @@ Please refer to the MeterSync User Guide for installation instructions
 <h3>Communicating with MeterSync</h3>
 MeterSync externally broadcasts various Intents to communicate with external programs. It also listens for certain Intents to allow your program to send commands to MeterSync. All communication is handled asynchronously. 
 
-The advantage of this strategy is that if MeterSync is not installed on a user’s device, your app will still work as it should, except that it will receive no information from the taxi meter. 
-
 <h3>Meter Events</h3>
 MeterSync broadcasts four events via Intents:
 
