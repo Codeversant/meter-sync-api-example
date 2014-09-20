@@ -27,6 +27,7 @@ public interface MeterSyncApi {
      * Meter's timer has been turned back on while hired
       */
     public static final String TimeOnIntentAction = "com.codeversant.MeterSync.MeterTimeOn";
+    public static final String TripCompletedIntentAction = "com.codeversant.MeterSync.TripCompleted";
 
     //BROADCAST TO REQUEST STATUS UPDATE FROM METERSYNC
     /**
@@ -44,5 +45,6 @@ public interface MeterSyncApi {
     public static final String TAX = "TAX";
     public static final String DISTANCE = "DISTANCE";
     public static final String TOTAL = "TOTAL";
+    public static final String TRIP_UUID = "TRIP_UUID";
 
 }

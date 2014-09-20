@@ -15,6 +15,7 @@ public class ExampleActivity extends Activity {
     private TextView taxLabel;
     private TextView totalLabel;
     private TextView distanceLabel;
+    private TextView tripUuidLabel;
 
 
     private final BroadcastReceiver meterOnReceiver = new BroadcastReceiver() {
@@ -38,7 +39,7 @@ public class ExampleActivity extends Activity {
 
 
 
-    private final BroadcastReceiver meterOffReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver tripCompletedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             stateLabel.setText("Meter Off");
@@ -51,15 +52,37 @@ public class ExampleActivity extends Activity {
             String lastExtra = intent.getStringExtra(MeterSyncApi.EXTRAS);
             String lastTax = intent.getStringExtra(MeterSyncApi.TAX);
             String lastTotal = intent.getStringExtra(MeterSyncApi.TOTAL);
+            String tripUuid = intent.getStringExtra(MeterSyncApi.TRIP_UUID);
 
             fareLabel.setText(lastFare);
             extraLabel.setText(lastExtra);
             taxLabel.setText(lastTax);
             totalLabel.setText(lastTotal);
             distanceLabel.setText(lastDistance);
+            tripUuidLabel.setText(tripUuid);
         }
     };
+    private final BroadcastReceiver meterOffReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            stateLabel.setText("Meter Off");
 
+            //Optional extra data on last fare
+            //this is only present on the initial MeterOff intent
+            //NOT in the response to QueryMeterStatus
+            /*String lastFare = intent.getStringExtra(MeterSyncApi.FARE);
+            String lastDistance = intent.getStringExtra(MeterSyncApi.DISTANCE);
+            String lastExtra = intent.getStringExtra(MeterSyncApi.EXTRAS);
+            String lastTax = intent.getStringExtra(MeterSyncApi.TAX);
+            String lastTotal = intent.getStringExtra(MeterSyncApi.TOTAL);
+
+            fareLabel.setText(lastFare);
+            extraLabel.setText(lastExtra);
+            taxLabel.setText(lastTax);
+            totalLabel.setText(lastTotal);
+            distanceLabel.setText(lastDistance);*/
+        }
+    };
 
     /**
      * Called when the activity is first created.
@@ -74,7 +97,7 @@ public class ExampleActivity extends Activity {
         extraLabel = (TextView)findViewById(R.id.lastExtraValue);
         taxLabel = (TextView)findViewById(R.id.lastTaxValue);
         totalLabel = (TextView)findViewById(R.id.lastTotalValue);
-
+        tripUuidLabel = (TextView)findViewById(R.id.tripUuid);
         distanceLabel = (TextView)findViewById(R.id.lastDistanceValue);
     }
 
@@ -88,6 +111,7 @@ public class ExampleActivity extends Activity {
         registerReceiver(meterOffReceiver, new IntentFilter(MeterSyncApi.MeterOffIntentAction));
         registerReceiver(timeOffReceiver, new IntentFilter(MeterSyncApi.TimeOffIntentAction));
         registerReceiver(timeOnReceiver, new IntentFilter(MeterSyncApi.TimeOnIntentAction));
+        registerReceiver(tripCompletedReceiver, new IntentFilter(MeterSyncApi.TripCompletedIntentAction));
 
     }
 
@@ -98,6 +122,7 @@ public class ExampleActivity extends Activity {
         unregisterReceiver(meterOffReceiver);
         unregisterReceiver(timeOffReceiver);
         unregisterReceiver(timeOnReceiver);
+        unregisterReceiver(tripCompletedReceiver);
 
         super.onStop();
     }
