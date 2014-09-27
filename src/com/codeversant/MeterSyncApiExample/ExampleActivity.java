@@ -44,9 +44,6 @@ public class ExampleActivity extends Activity {
         public void onReceive(Context context, Intent intent) {
             stateLabel.setText("Meter Off");
 
-            //Optional extra data on last fare
-            //this is only present on the initial MeterOff intent
-            //NOT in the response to QueryMeterStatus
             String lastFare = intent.getStringExtra(MeterSyncApi.FARE);
             String lastDistance = intent.getStringExtra(MeterSyncApi.DISTANCE);
             String lastExtra = intent.getStringExtra(MeterSyncApi.EXTRAS);
@@ -132,7 +129,8 @@ public class ExampleActivity extends Activity {
         super.onResume();
         //Request that MeterSync send a status update
         //indicating whether the meter is on or off
-        sendBroadcast(new Intent(MeterSyncApi.QueryMeterStatusAction));
+        sendBroadcast(new Intent(MeterSyncApi.QueryMeterStatusAction),
+                                    MeterSyncApi.API_PERMISSIONS);
     }
 
     @Override

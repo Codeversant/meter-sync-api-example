@@ -35,6 +35,7 @@ public interface MeterSyncApi {
      * It will respond by sending one of the above intents (ie., MeterOn or MeterOff)
      */
     public static final String QueryMeterStatusAction = "com.codeversant.MeterSync.QueryStatus";
+    public static final String API_PERMISSIONS= "com.codeversant.MeterSync.ACCESS_TAXIMETER";
 
     //Intent Extras Keys found in MeterOff messages
     //that are sent when the meter is turned off.
